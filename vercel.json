@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://farmiq-api.onrender.com/api/:path*"
+      "destination": "https://farmiq-7qet.onrender.com/api/:path*"
     }
   ]
 }
