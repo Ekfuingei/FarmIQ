@@ -1,0 +1,19 @@
+# Render Blueprint — FarmIQ Backend
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: farmiq-api
+    runtime: node
+    region: oregon
+
+    # Build
+    buildCommand: npm install
+    startCommand: node server/index.js
+
+    # Health check
+    healthCheckPath: /api/health
+
+    # Environment variables (set GEMINI_API_KEY in Render dashboard)
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
