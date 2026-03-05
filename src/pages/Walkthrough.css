@@ -1,0 +1,92 @@
+.walkthrough {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  padding-top: 5rem;
+  background: linear-gradient(180deg, var(--farm-green) 0%, var(--farm-green-light) 100%);
+}
+
+.walkthrough-brand {
+  position: absolute;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.walkthrough-slide {
+  text-align: center;
+  color: var(--white);
+  max-width: 320px;
+}
+
+.slide-icon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+
+.walkthrough-slide h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.walkthrough-slide p {
+  font-size: 1rem;
+  opacity: 0.95;
+  line-height: 1.5;
+}
+
+.walkthrough-dots {
+  display: flex;
+  gap: 0.5rem;
+  margin: 2rem 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transition: all 0.2s;
+}
+
+.dot.active {
+  background: var(--white);
+  transform: scale(1.2);
+}
+
+.walkthrough-actions {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 280px;
+  justify-content: space-between;
+}
+
+.walkthrough-actions button {
+  min-height: 48px;
+  min-width: 100px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-skip {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border: 2px solid rgba(255,255,255,0.5);
+}
+
+.btn-next {
+  background: var(--white);
+  color: var(--farm-green);
+  border: none;
+  flex: 1;
+}

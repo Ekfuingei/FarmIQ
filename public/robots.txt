@@ -1,0 +1,5 @@
+# FarmIQ - Allow all crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://farmiq.app/sitemap.xml

@@ -1,0 +1,17 @@
+{
+  "name": "FarmIQ",
+  "short_name": "FarmIQ",
+  "description": "Your farming super-app. AI Crop Doctor, weather, market prices & tool sharing for African farmers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2D5A27",
+  "theme_color": "#2D5A27",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

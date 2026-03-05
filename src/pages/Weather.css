@@ -1,0 +1,71 @@
+.planting-tip {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  border: 1px solid rgba(45, 90, 39, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.planting-tip strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--farm-green);
+}
+
+.weather-alerts {
+  margin-bottom: 1rem;
+}
+
+.weather-alerts strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #e65100;
+}
+
+.alert {
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.alert-heavy_rain { background: #e3f2fd; border: 1px solid #1976d2; }
+.alert-heat { background: #fff3e0; border: 1px solid #e65100; }
+.alert-drought_risk { background: #fff8e1; border: 1px solid #f9a825; }
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+}
+
+.day-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.day-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--farm-green);
+  margin-bottom: 0.35rem;
+}
+
+.day-card .temp {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.day-card .desc, .day-card .rain {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.weather.loading {
+  text-align: center;
+  padding: 2rem;
+}

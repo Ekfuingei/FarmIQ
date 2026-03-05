@@ -1,0 +1,33 @@
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-logo--icon {
+  justify-content: center;
+}
+
+.brand-mark {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.brand-mark svg {
+  display: block;
+}
+
+.brand-wordmark {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: inherit;
+}
+
+.brand-logo--full .brand-wordmark {
+  color: white;
+}
+
+.brand-logo--dark .brand-wordmark {
+  color: var(--brand-primary);
+}

@@ -1,0 +1,83 @@
+.onboarding {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, var(--farm-green) 0%, var(--farm-green-light) 100%);
+}
+
+.onboarding-content {
+  max-width: 400px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.onboarding-logo {
+  margin-bottom: 0.75rem;
+}
+
+.onboarding-logo.brand-logo--full .brand-wordmark {
+  color: var(--brand-primary);
+  font-size: 1.75rem;
+}
+
+.onboarding h2 {
+  font-size: 1.4rem;
+  color: var(--farm-green);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.onboarding-subtitle {
+  text-align: center;
+  color: var(--text);
+  opacity: 0.85;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.language-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.lang-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1rem 0.75rem;
+  border: 2px solid var(--farm-green);
+  border-radius: 12px;
+  background: rgba(45, 90, 39, 0.05);
+  color: var(--farm-green);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  background: var(--farm-green);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.lang-flag {
+  font-size: 1.5rem;
+}
+
+.lang-name {
+  font-size: 0.9rem;
+}
+
+.onboarding-note {
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}

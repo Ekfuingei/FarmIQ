@@ -1,0 +1,73 @@
+.home .hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.home .hero-brand {
+  margin-bottom: 0.5rem;
+}
+
+.home .hero-brand .brand-mark svg {
+  margin: 0 auto;
+}
+
+.home .hero h2 {
+  font-size: 1.4rem;
+  color: var(--farm-green);
+  margin-bottom: 0.5rem;
+}
+
+.home .hero p {
+  color: var(--text);
+  opacity: 0.85;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.feature-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 120px;
+}
+
+.feature-card .icon {
+  font-size: 2.5rem;
+}
+
+.feature-card:not(.disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(45, 90, 39, 0.15);
+}
+
+.feature-card.disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.feature-card .icon {
+  font-size: 2rem;
+}
+
+.feature-card h3 {
+  font-size: 1.1rem;
+  color: var(--farm-green);
+}
+
+.feature-card p {
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.8;
+}

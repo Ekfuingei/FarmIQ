@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+/* FarmIQ Brand — African Farmer Super-App
+   Palette: Growth (green), Harvest (gold), Earth (brown), Warm cream (background)
+*/
+:root {
+  /* Brand primary */
+  --brand-primary: #2D5A27;
+  --brand-primary-light: #3D7A35;
+  --brand-primary-dark: #1E3D1A;
+
+  /* Brand accent (harvest, sun) */
+  --brand-gold: #E8B923;
+  --brand-gold-light: #F5D547;
+  --brand-gold-dark: #C99A10;
+
+  /* Earth tones */
+  --brand-earth: #5C4033;
+  --brand-soil: #8B6B4A;
+
+  /* Neutrals */
+  --brand-cream: #FAFBF8;
+  --brand-cream-warm: #F5E6D3;
+  --brand-text: #1A1A1A;
+  --brand-text-muted: #4A4A4A;
+
+  /* Legacy aliases (backward compat) */
+  --farm-green: var(--brand-primary);
+  --farm-green-light: var(--brand-primary-light);
+  --farm-gold: var(--brand-gold);
+  --earth-brown: var(--brand-earth);
+  --soil-tan: var(--brand-cream-warm);
+  --white: var(--brand-cream);
+  --text: var(--brand-text);
+
+  /* UI */
+  --touch-min: 48px;
+  --font-base: 1rem;
+  --font-lg: 1.15rem;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-brand: 0 2px 12px rgba(45, 90, 39, 0.25);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Large text mode for low literacy */
+body.large-text {
+  --font-base: 1.2rem;
+  --font-lg: 1.35rem;
+}
+
+body.large-text .main,
+body.large-text .feature-card,
+body.large-text .diagnosis-result,
+body.large-text .market-card,
+body.large-text .equipment-card,
+body.large-text .day-card {
+  font-size: var(--font-base);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--soil-tan);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}

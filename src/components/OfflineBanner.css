@@ -1,0 +1,30 @@
+.offline-banner {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #e65100;
+  color: var(--white);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 1000;
+  font-size: 0.95rem;
+}
+
+.offline-icon {
+  font-size: 1.2rem;
+}
+
+.offline-retry {
+  margin-left: auto;
+  padding: 0.4rem 1rem;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.5);
+  color: var(--white);
+  border-radius: 8px;
+  font-weight: 600;
+  min-height: 40px;
+  cursor: pointer;
+}
