@@ -82,7 +82,7 @@ FarmIQ/
 
 | Layer | Tool | Notes |
 |-------|------|-------|
-| **AI / Crop Doctor** | Gemini 2.0 Flash (Vision) | Image understanding, disease/pest/deficiency diagnosis |
+| **AI / Crop Doctor** | Gemini 1.5 Flash (Vision) | Image understanding, disease/pest/deficiency diagnosis |
 | **Voice (planned)** | Gemini TTS / Live API | Hausa, Yoruba, Igbo, Pidgin support |
 | **Weather** | Open-Meteo API | Free, no key, 1–11 km resolution |
 | **Frontend** | React + Vite | PWA-ready, works on low-end phones |

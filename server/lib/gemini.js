@@ -5,8 +5,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
-const FALLBACK_MODEL = 'gemini-1.5-flash';
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+const FALLBACK_MODEL = 'gemini-1.5-flash-8b';
 
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
@@ -18,7 +18,7 @@ function isRetryable(err) {
 }
 
 /**
- * Generate content with retry on 429. Falls back to gemini-1.5-flash if 2.0 quota is exhausted.
+ * Generate content with retry on 429. Falls back to gemini-1.5-flash-8b if main model quota is exhausted.
  */
 export async function generateWithRetry(contents) {
   const models = DEFAULT_MODEL === FALLBACK_MODEL ? [DEFAULT_MODEL] : [DEFAULT_MODEL, FALLBACK_MODEL];
