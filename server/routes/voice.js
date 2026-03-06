@@ -4,10 +4,9 @@
  * Supports: Hausa, Yoruba, Igbo, Pidgin, French, Arabic, Swahili
  */
 import { Router } from 'express';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { generateWithRetry } from '../lib/gemini.js';
 
 const router = Router();
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 const FARMING_CONTEXT = `You are a friendly farming advisor for African farmers. They ask you questions by voice.
 Rules:
@@ -30,20 +29,19 @@ router.post('/ask', async (req, res) => {
       return res.status(500).json({ error: 'GEMINI_API_KEY is not set' });
     }
     const langHint = language ? `The farmer is speaking ${language}. Respond in the same language.` : '';
-    const model = genAI.getGenerativeModel({
-      model: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
-    });
-    const result = await model.generateContent([
+    const text = await generateWithRetry([
       FARMING_CONTEXT + langHint,
       question.trim(),
     ]);
-    const text = result.response.text();
     res.json({ answer: text });
   } catch (err) {
     console.error('Voice ask error:', err);
-    res.status(500).json({
+    const isQuota = (err?.message || '').includes('429') || (err?.message || '').includes('quota');
+    const status = isQuota ? 429 : 500;
+    const answer = isQuota ? 'Our AI is busy. Please try again in a few minutes.' : 'Samuwa ta yi. Ka sake gwada. Sorry, please try again.';
+    res.status(status).json({
       error: err.message || 'Could not get answer',
-      answer: 'Samuwa ta yi. Ka sake gwada. Sorry, please try again.',
+      answer,
     });
   }
 });

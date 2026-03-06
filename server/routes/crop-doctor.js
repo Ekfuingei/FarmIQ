@@ -5,7 +5,7 @@
  */
 import { Router } from 'express';
 import multer from 'multer';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { generateWithRetry } from '../lib/gemini.js';
 
 const router = Router();
 
@@ -32,7 +32,6 @@ const soilUpload = multer({
     else cb(new Error('Use a photo (JPEG/PNG) or video (MP4/WebM) of the soil.'));
   },
 });
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 const CROP_CONTEXT = `
 You are an expert agronomist for African farmers across the continent. You specialize in: maize, cassava, yam, cocoa, sorghum, rice, teff, coffee, beans, millet, plantain, wheat, olives, dates, and other staple crops grown in West, East, Southern, Central, and North Africa.
@@ -95,16 +94,13 @@ export async function diagnoseWithGemini(imageBuffer, mimeType) {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error('GEMINI_API_KEY is not set. Add it to .env');
   }
-  const modelName = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
-  const model = genAI.getGenerativeModel({ model: modelName });
   const imagePart = {
     inlineData: {
       data: imageBuffer.toString('base64'),
       mimeType: mimeType || 'image/jpeg',
     },
   };
-  const result = await model.generateContent([CROP_CONTEXT, imagePart]);
-  const text = result.response.text();
+  const text = await generateWithRetry([CROP_CONTEXT, imagePart]);
   return parseDiagnosisResponse(text);
 }
 
@@ -144,17 +140,13 @@ export async function analyzeSoilWithGemini(fileBuffer, mimeType) {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error('GEMINI_API_KEY is not set. Add it to .env');
   }
-  const modelName = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
-  const model = genAI.getGenerativeModel({ model: modelName });
-  const isVideo = mimeType.startsWith('video/');
   const part = {
     inlineData: {
       data: fileBuffer.toString('base64'),
       mimeType: mimeType || 'image/jpeg',
     },
   };
-  const result = await model.generateContent([SOIL_CONTEXT, part]);
-  const text = result.response.text();
+  const text = await generateWithRetry([SOIL_CONTEXT, part]);
   return parseSoilResponse(text);
 }
 
@@ -168,9 +160,11 @@ router.post('/diagnose', imageUpload.single('image'), async (req, res) => {
     res.json(result);
   } catch (err) {
     console.error('Crop Doctor error:', err);
-    res.status(500).json({
-      error: err.message || 'Diagnosis failed',
-      diagnosis: 'We couldn\'t analyze your photo. Please check your connection and try again.',
+    const isQuota = (err?.message || '').includes('429') || (err?.message || '').includes('quota');
+    const msg = isQuota ? 'Too many requests. Please try again in a few minutes.' : (err.message || 'Diagnosis failed');
+    res.status(isQuota ? 429 : 500).json({
+      error: msg,
+      diagnosis: isQuota ? 'Our AI is busy. Please wait a moment and try again.' : 'We couldn\'t analyze your photo. Please check your connection and try again.',
       condition: 'unknown',
       confidence: 0,
       treatment: [],
@@ -191,9 +185,11 @@ router.post('/analyze-soil', soilUpload.single('file'), async (req, res) => {
     res.json(result);
   } catch (err) {
     console.error('Soil analysis error:', err);
-    res.status(500).json({
-      error: err.message || 'Soil analysis failed',
-      summary: 'We couldn\'t analyze your soil. Please try again with a clear photo or short video.',
+    const isQuota = (err?.message || '').includes('429') || (err?.message || '').includes('quota');
+    const msg = isQuota ? 'Too many requests. Please try again in a few minutes.' : (err.message || 'Soil analysis failed');
+    res.status(isQuota ? 429 : 500).json({
+      error: msg,
+      summary: isQuota ? 'Our AI is busy. Please wait a moment and try again.' : 'We couldn\'t analyze your soil. Please try again with a clear photo or short video.',
       indicators: {},
       likelyDeficiencies: [],
       recommendedCrops: [],
