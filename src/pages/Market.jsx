@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../LanguageContext';
+import { API_BASE } from '../api';
 import { Seo } from '../components/Seo';
 import './Market.css';
 
@@ -8,7 +9,7 @@ export function Market() {
   const [markets, setMarkets] = useState([]);
 
   useEffect(() => {
-    fetch('/api/market/prices')
+    fetch(`${API_BASE}/api/market/prices`)
       .then((r) => r.json())
       .then((d) => setMarkets(d.markets || []))
       .catch(() => setMarkets([]));

@@ -29,8 +29,7 @@ Deploy **frontend** on Vercel and **backend** on Render via GitHub Actions.
    - **Framework Preset**: Vite
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
-4. **Important**: Update `vercel.json` if your Render URL differs:
-   - If your API is at `https://your-service.onrender.com`, change the `rewrites` destination
+4. **Required**: Add environment variable `VITE_API_URL` = your Render URL (e.g. `https://farmiq-7qet.onrender.com`)
 
 ---
 
@@ -53,7 +52,7 @@ Add these in **GitHub** → **Settings** → **Secrets and variables** → **Act
 
 - **On every push/PR**: The workflow runs `npm run build` and verifies the backend starts
 - **On push to main**: Deploys to Vercel (if secrets set) and triggers Render deploy (if hook set)
-- **API routing**: `vercel.json` rewrites `/api/*` to your Render backend so the frontend uses one origin
+- **API routing**: Frontend calls Render directly using `VITE_API_URL` (CORS enabled on backend)
 
 ---
 
@@ -62,4 +61,5 @@ Add these in **GitHub** → **Settings** → **Secrets and variables** → **Act
 | Service | Variable | Notes |
 |---------|----------|-------|
 | Render | `GEMINI_API_KEY` | Required for Crop Doctor |
-| Vercel | None | Optional: `VITE_APP_URL` for SEO/canonical URLs |
+| Vercel | `VITE_API_URL` | **Required** — your Render backend URL, e.g. `https://farmiq-7qet.onrender.com` |
+| Vercel | `VITE_APP_URL` | Optional — for SEO/canonical URLs (e.g. `https://your-app.vercel.app`) |

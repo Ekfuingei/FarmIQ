@@ -28,7 +28,7 @@ jobs:
       - name: Build frontend
         run: npm run build
         env:
-          VITE_API_URL: https://farmiq-api.onrender.com
+          VITE_API_URL: https://farmiq-7qet.onrender.com
 
       - name: Verify backend starts
         run: timeout 5 node server/index.js || true

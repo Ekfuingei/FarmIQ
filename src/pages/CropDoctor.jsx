@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useLanguage } from '../LanguageContext';
+import { API_BASE } from '../api';
 import { Seo } from '../components/Seo';
 import './CropDoctor.css';
 
@@ -35,7 +36,7 @@ export function CropDoctor() {
     if (!file) return;
     setLoading(true);
     setResult(null);
-    const endpoint = mode === 'soil' ? '/api/crop-doctor/analyze-soil' : '/api/crop-doctor/diagnose';
+    const endpoint = `${API_BASE}/api/crop-doctor/${mode === 'soil' ? 'analyze-soil' : 'diagnose'}`;
     const form = new FormData();
     form.append(mode === 'soil' ? 'file' : 'image', file);
     if (mode === 'crop') form.append('crop', crop);

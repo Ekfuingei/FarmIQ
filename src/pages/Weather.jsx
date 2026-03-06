@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../LanguageContext';
+import { API_BASE } from '../api';
 import { Seo } from '../components/Seo';
 import './Weather.css';
 
@@ -46,9 +47,9 @@ export function Weather() {
     const fetchWeather = async () => {
       try {
         const [fRes, tRes, aRes] = await Promise.all([
-          fetch(`/api/weather/forecast?lat=${lat}&lng=${lng}`),
-          fetch(`/api/weather/planting-tip?lat=${lat}&lng=${lng}`),
-          fetch(`/api/weather/alerts?lat=${lat}&lng=${lng}`),
+          fetch(`${API_BASE}/api/weather/forecast?lat=${lat}&lng=${lng}`),
+          fetch(`${API_BASE}/api/weather/planting-tip?lat=${lat}&lng=${lng}`),
+          fetch(`${API_BASE}/api/weather/alerts?lat=${lat}&lng=${lng}`),
         ]);
         const f = await fRes.json();
         const tipData = await tRes.json();
@@ -71,9 +72,9 @@ export function Weather() {
     (async () => {
       try {
         const [fRes, tRes, aRes] = await Promise.all([
-          fetch(`/api/weather/forecast?lat=${location.lat}&lng=${location.lng}`),
-          fetch(`/api/weather/planting-tip?lat=${location.lat}&lng=${location.lng}`),
-          fetch(`/api/weather/alerts?lat=${location.lat}&lng=${location.lng}`),
+          fetch(`${API_BASE}/api/weather/forecast?lat=${location.lat}&lng=${location.lng}`),
+          fetch(`${API_BASE}/api/weather/planting-tip?lat=${location.lat}&lng=${location.lng}`),
+          fetch(`${API_BASE}/api/weather/alerts?lat=${location.lat}&lng=${location.lng}`),
         ]);
         const f = await fRes.json();
         const tipData = await tRes.json();

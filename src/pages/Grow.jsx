@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../LanguageContext';
+import { API_BASE } from '../api';
 import { Seo } from '../components/Seo';
 import './Grow.css';
 
@@ -60,7 +61,7 @@ function PlantingCalendar({ lat, lng }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/grow/planting-calendar?crop=${crop}&lat=${lat}&lng=${lng}`)
+    fetch(`${API_BASE}/api/grow/planting-calendar?crop=${crop}&lat=${lat}&lng=${lng}`)
       .then((r) => r.json())
       .then(setData)
       .catch(() => setData(null));
@@ -94,7 +95,7 @@ function CropReminders() {
   useEffect(() => {
     const crops = [...new Set(plantings.map((p) => p.crop))];
     crops.forEach((c) => {
-      fetch(`/api/grow/care-milestones?crop=${c}`)
+      fetch(`${API_BASE}/api/grow/care-milestones?crop=${c}`)
         .then((r) => r.json())
         .then((d) => setMilestonesByCrop((prev) => ({ ...prev, [c]: d.milestones || [] })));
     });
@@ -179,7 +180,7 @@ function CropRotation() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/grow/rotation?after=${after}`)
+    fetch(`${API_BASE}/api/grow/rotation?after=${after}`)
       .then((r) => r.json())
       .then(setData)
       .catch(() => setData(null));
@@ -211,7 +212,7 @@ function PostHarvestTips() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/grow/post-harvest?crop=${crop}`)
+    fetch(`${API_BASE}/api/grow/post-harvest?crop=${crop}`)
       .then((r) => r.json())
       .then(setData)
       .catch(() => setData(null));

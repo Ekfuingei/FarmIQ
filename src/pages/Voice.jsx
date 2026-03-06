@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../LanguageContext';
+import { API_BASE } from '../api';
 import { Seo } from '../components/Seo';
 import './Voice.css';
 
@@ -67,7 +68,7 @@ export function Voice() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/voice/ask', {
+      const res = await fetch(`${API_BASE}/api/voice/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: q, language: language.name }),

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../LanguageContext';
+import { API_BASE } from '../api';
 import { Seo } from '../components/Seo';
 import './Tools.css';
 
@@ -30,12 +31,12 @@ export function Tools() {
         (p) => {
           params.set('lat', p.coords.latitude);
           params.set('lng', p.coords.longitude);
-          fetch(`/api/tools?${params}`).then(r => r.json()).then(d => setEquipment(d.equipment || [])).finally(() => setLoading(false));
+          fetch(`${API_BASE}/api/tools?${params}`).then(r => r.json()).then(d => setEquipment(d.equipment || [])).finally(() => setLoading(false));
         },
-        () => fetch(`/api/tools?${params}`).then(r => r.json()).then(d => setEquipment(d.equipment || [])).finally(() => setLoading(false))
+        () => fetch(`${API_BASE}/api/tools?${params}`).then(r => r.json()).then(d => setEquipment(d.equipment || [])).finally(() => setLoading(false))
       );
     } else {
-      fetch(`/api/tools?${params}`).then(r => r.json()).then(d => setEquipment(d.equipment || [])).finally(() => setLoading(false));
+      fetch(`${API_BASE}/api/tools?${params}`).then(r => r.json()).then(d => setEquipment(d.equipment || [])).finally(() => setLoading(false));
     }
   }, [filter]);
 
@@ -43,7 +44,7 @@ export function Tools() {
     if (!selected) return;
     setSubmitStatus('Sending...');
     try {
-      const res = await fetch(`/api/tools/${selected.id}/book`, {
+      const res = await fetch(`${API_BASE}/api/tools/${selected.id}/book`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -73,7 +74,7 @@ export function Tools() {
     }
     setSubmitStatus('Adding...');
     try {
-      const res = await fetch('/api/tools', {
+      const res = await fetch(`${API_BASE}/api/tools`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -98,7 +99,7 @@ export function Tools() {
   const submitRating = async () => {
     if (!selected) return;
     try {
-      const res = await fetch(`/api/tools/${selected.id}/rate`, {
+      const res = await fetch(`${API_BASE}/api/tools/${selected.id}/rate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ stars: rating.stars, review: rating.review }),
