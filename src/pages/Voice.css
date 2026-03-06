@@ -42,13 +42,13 @@
 }
 
 .mic-btn {
-  width: 160px;
-  height: 160px;
+  width: clamp(120px, 35vw, 180px);
+  height: clamp(120px, 35vw, 180px);
   border-radius: 50%;
   border: 4px solid var(--farm-green);
   background: rgba(45, 90, 39, 0.1);
   color: var(--farm-green);
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;

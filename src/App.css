@@ -4,17 +4,24 @@
 
 .app {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  padding-bottom: 88px;
-  padding-top: 0;
+  padding-bottom: calc(88px + var(--safe-bottom));
+  padding-top: var(--safe-top);
 }
 
+@media (min-width: 640px) {
+  .app {
+    padding-bottom: calc(96px + var(--safe-bottom));
+  }
+}
 
 .header {
   background: linear-gradient(135deg, var(--farm-green) 0%, var(--farm-green-light) 100%);
   color: var(--white);
-  padding: 1.25rem 1rem;
+  padding: 1rem clamp(1rem, 4vw, 1.5rem);
+  padding-top: calc(1rem + var(--safe-top));
   text-align: center;
   box-shadow: 0 2px 12px rgba(45, 90, 39, 0.3);
 }
@@ -31,9 +38,16 @@
 }
 
 .header .tagline {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem);
   opacity: 0.9;
   margin: 0;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 1.25rem 2rem;
+    padding-top: calc(1.25rem + var(--safe-top));
+  }
 }
 
 .lang-switcher {
@@ -83,7 +97,16 @@
 
 .main {
   flex: 1;
-  padding: 1rem;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  max-width: var(--content-max-wide);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 1.25rem 2rem;
+  }
 }
 
 .bottom-nav {
@@ -92,13 +115,27 @@
   left: 0;
   right: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   gap: 0.25rem;
   background: var(--white);
   padding: 0.5rem 0.25rem;
+  padding-bottom: calc(0.5rem + var(--safe-bottom));
   box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
   z-index: 100;
+  max-width: var(--content-max-wide);
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .bottom-nav {
+    border-radius: 16px 16px 0 0;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: 720px;
+  }
 }
 
 .bottom-nav a {
@@ -108,15 +145,22 @@
   gap: 0.2rem;
   text-decoration: none;
   color: var(--text);
-  font-size: 0.65rem;
+  font-size: clamp(0.6rem, 2vw, 0.7rem);
   font-weight: 500;
   padding: 0.5rem 0.35rem;
   min-height: var(--touch-min);
-  min-width: 52px;
+  min-width: 44px;
   border-radius: 12px;
   transition: all 0.2s;
   flex: 1;
-  max-width: 72px;
+  max-width: 80px;
+}
+
+@media (min-width: 640px) {
+  .bottom-nav a {
+    min-width: 56px;
+    max-width: 100px;
+  }
 }
 
 .bottom-nav a .nav-icon {
@@ -132,8 +176,8 @@
 /* Floating Help button */
 .help-fab {
   position: fixed;
-  bottom: 5.5rem;
-  right: 1rem;
+  bottom: calc(5.5rem + var(--safe-bottom));
+  right: clamp(1rem, 4vw, 1.5rem);
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -148,6 +192,13 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.2s;
+}
+
+@media (min-width: 768px) {
+  .help-fab {
+    bottom: 1.5rem;
+    right: clamp(1.5rem, 5vw, 2rem);
+  }
 }
 
 .help-fab:hover {

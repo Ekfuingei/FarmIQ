@@ -55,7 +55,13 @@
   border-radius: 8px;
   border: 1px solid #ccc;
   width: 100%;
-  max-width: 200px;
+  max-width: 100%;
+}
+
+@media (min-width: 480px) {
+  .crop-select select {
+    max-width: 200px;
+  }
 }
 
 .upload-zone {
@@ -64,8 +70,8 @@
 
 .upload-btn {
   width: 100%;
-  min-height: 140px;
-  padding: 2rem;
+  min-height: clamp(120px, 25vw, 160px);
+  padding: clamp(1rem, 4vw, 2rem);
   border: 3px dashed var(--farm-green);
   border-radius: 16px;
   background: rgba(45, 90, 39, 0.05);
@@ -146,9 +152,16 @@
 .preview-wrap img,
 .preview-wrap video {
   width: 100%;
-  max-height: 280px;
+  max-height: min(280px, 50vh);
   object-fit: cover;
   display: block;
+}
+
+@media (min-width: 640px) {
+  .preview-wrap img,
+  .preview-wrap video {
+    max-height: 320px;
+  }
 }
 
 .preview-actions {
